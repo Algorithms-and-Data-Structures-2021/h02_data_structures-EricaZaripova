@@ -122,7 +122,7 @@ void ArrayList::resize(int new_capacity) {
   std::fill(new_data + size_, new_data + new_capacity, Element::UNINITIALIZED);
 
   // 4. высвобождаем старый участок памяти меньшего размера
-  delete data_;
+  delete[] data_;
 
   // 5. пересылаем указатель на новый участок памяти
   data_ = new_data;
