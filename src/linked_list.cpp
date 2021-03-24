@@ -22,19 +22,23 @@ void LinkedList::Add(Element e) {
 void LinkedList::Insert(int index, Element e) {
   internal::check_out_of_range(index, 0, size_ + 1);
   Node* node = new Node(e, nullptr);
-  if (size_ == 0) {
-      head_ = node;
-      tail_ = node;
-  } else if (index == 0) {
-      head_ = node;
-  } else if (index == size_) {
-      tail_->next = node;
-      tail_ = node;
-  } else {
-      node->next = find_node(index);
-      find_node(index-1)->next = node;
-  }
-  size_ += 1;
+    if (size_ == 0) {
+        head_= node;
+        tail_ = node;
+    }
+    if (index == 0 && size_ > 0) {
+        node -> next = head_;
+        head_ = node;
+    }
+    if (index == size_ && size_ > 0) {
+        tail_ -> next = node;
+        tail_ = node;
+    }
+    if (size_ > 0 && index > 0 && index < size_) {
+        node -> next = find_node(index);
+        find_node(index - 1) -> next = node;
+    }
+    size_++;
 }
 
 void LinkedList::Set(int index, Element e) {
